@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Exquisite | Men's Luxury Fashion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- ✅ PAYSTACK PAYMENT SCRIPT -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<style>
+  :root {
+    --gold: #C8900A;
+    --gold-light: #E4A812;
+    --gold-dark: #A07810;
+    --gold-gradient: linear-gradient(135deg, #F0B429 0%, #C8900A 50%, #A07810 100%);
+    --black: #0A0A0A;
+    --white: #FFFFFF;
+    --bg: #F9F7F3;
+    --bg2: #F2EFE8;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --text-soft: #444444;
+    --gray: #777777;
+    --gray-light: #AAAAAA;
+    --border: #E0D8C8;
+    --border-gold: rgba(200,144,10,0.25);
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-md: 0 8px 40px rgba(0,0,0,0.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Montserrat',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+  ::-webkit-scrollbar { width:4px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--gold); border-radius:2px; }
+
+  /* ===================== REAL PHOTO SUPPORT ===================== */
+  /* Product card image fills its container perfectly */
+  .product-img { height:255px; background:var(--bg2); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .product-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; transition:transform .5s; }
+  .product-card:hover .product-img img { transform:scale(1.06); }
+
+  /* Category card image fills its background */
+  .cat-bg { position:absolute; inset:0; transition:transform .55s; background-size:cover; background-position:center; }
+  .cat-bg img { width:100%; height:100%; object-fit:cover; }
+  .category-card:hover .cat-bg { transform:scale(1.06); }
+
+  /* Hero right panel image */
+  .hero-model-img { width:100%; height:100%; object-fit:cover; object-position:top center; position:absolute; inset:0; }
+
+  /* About visual image */
+  .about-visual img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+
+  /* Blog card image */
+  .blog-img img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+  .blog-img { position:relative; }
+
+  /* Thumbnail images in product detail */
+  .thumb img { width:100%; height:100%; object-fit:cover; }
+  .main-product-img img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+  .main-product-img { width:100%; aspect-ratio:3/4; background:var(--white); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:9rem; margin-bottom:.9rem; overflow:hidden; position:relative; }
+
+  /* ===================== CHECKOUT MODAL ===================== */
+  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:3000; display:none; align-items:center; justify-content:center; padding:1rem; }
+  .modal-overlay.open { display:flex; }
+  .modal-box { background:var(--white); width:100%; max-width:500px; border-top:4px solid var(--gold); box-shadow:var(--shadow-md); animation:slideDown .3s ease; max-height:90vh; overflow-y:auto; }
+  .modal-header { display:flex; justify-content:space-between; align-items:center; padding:1.5rem 1.8rem; border-bottom:1px solid var(--border); }
+  .modal-header h3 { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--text); }
+  .modal-close { background:none; border:none; font-size:1.3rem; cursor:pointer; color:var(--gray); }
+  .modal-body { padding:1.8rem; }
+  .modal-order-summary { background:var(--bg2); border:1px solid var(--border); padding:1.2rem; margin-bottom:1.5rem; }
+  .modal-order-title { font-size:.57rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:.8rem; }
+  .modal-order-item { display:flex; justify-content:space-between; font-size:.76rem; color:var(--text-soft); padding:.28rem 0; }
+  .modal-order-total { display:flex; justify-content:space-between; font-size:.9rem; font-weight:700; color:var(--text); border-top:1px solid var(--border); padding-top:.8rem; margin-top:.5rem; }
+  .modal-order-total span:last-child { color:var(--gold); }
+  .pay-btn { background:var(--gold-gradient); color:var(--white); border:none; padding:16px; width:100%; font-family:'Montserrat',sans-serif; font-size:.76rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:all .3s; margin-top:1.2rem; }
+  .pay-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(200,144,10,.35); }
+  .pay-note { font-size:.6rem; color:var(--gray-light); text-align:center; margin-top:.7rem; }
+
+  /* ===================== SEARCH OVERLAY ===================== */
+  .search-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; display:none; align-items:flex-start; justify-content:center; padding-top:110px; }
+  .search-overlay.open { display:flex; }
+  .search-box { background:var(--white); width:92%; max-width:620px; padding:2rem; box-shadow:var(--shadow-md); animation:slideDown .25s ease; border-top:3px solid var(--gold); }
+  @keyframes slideDown { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:translateY(0)} }
+  .search-box-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
+  .search-box-header span { font-size:.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
+  .search-close { background:none; border:none; font-size:1.3rem; cursor:pointer; color:var(--gray); line-height:1; }
+  .search-input-row { display:flex; border:1px solid var(--border); }
+  .search-input-row input { flex:1; padding:13px 15px; border:none; outline:none; font-family:'Montserrat',sans-serif; font-size:.87rem; background:var(--white); color:var(--text); min-width:0; }
+  .search-input-row button { background:var(--gold-gradient); border:none; padding:0 20px; color:var(--white); font-size:1.1rem; cursor:pointer; }
+  .search-tags { margin-top:.85rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; }
+  .search-tag-label { font-size:.57rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray-light); }
+  .search-tag { background:var(--bg2); border:1px solid var(--border); padding:5px 12px; font-size:.69rem; cursor:pointer; color:var(--text-soft); transition:all .2s; font-family:'Montserrat',sans-serif; }
+  .search-tag:hover { background:var(--gold); color:var(--white); border-color:var(--gold); }
+
+  /* MOBILE MENU */
+  .mobile-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1999; display:none; }
+  .mobile-overlay.open { display:block; }
+  .mobile-menu { position:fixed; top:0; right:-100%; width:72%; max-width:300px; height:100vh; background:var(--white); z-index:2000; padding:2rem 1.5rem; box-shadow:-4px 0 30px rgba(0,0,0,0.15); transition:right .35s ease; border-left:3px solid var(--gold); }
+  .mobile-menu.open { right:0; }
+  .mobile-menu-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem; }
+  .mobile-menu-close { background:none; border:none; font-size:1.4rem; cursor:pointer; color:var(--text); }
+  .mobile-menu-links { display:flex; flex-direction:column; }
+  .mobile-menu-links a { color:var(--text); text-decoration:none; font-size:.78rem; letter-spacing:2px; text-transform:uppercase; font-weight:600; padding:.95rem 0; border-bottom:1px solid var(--border); cursor:pointer; transition:color .2s; }
+  .mobile-menu-links a:hover { color:var(--gold); }
+
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:1000; padding:0 4rem; height:72px; display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,.97); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); box-shadow:0 2px 10px rgba(0,0,0,.05); transition:all .3s; }
+  nav.scrolled { height:60px; }
+  .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; cursor:pointer; }
+  .nav-logo-text { display:flex; flex-direction:column; line-height:1; }
+  .nav-logo-text span:first-child { font-family:'Playfair Display',serif; font-weight:700; font-size:1.05rem; color:var(--text); letter-spacing:2px; }
+  .nav-logo-text span:last-child { font-size:.54rem; letter-spacing:4px; color:var(--gold); text-transform:uppercase; font-weight:500; }
+  .nav-links { display:flex; align-items:center; gap:2.5rem; list-style:none; }
+  .nav-links a { color:var(--text-soft); text-decoration:none; font-size:.69rem; letter-spacing:2px; text-transform:uppercase; font-weight:600; transition:color .25s; position:relative; cursor:pointer; }
+  .nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--gold); transition:width .3s; }
+  .nav-links a:hover,.nav-links a.active { color:var(--gold); }
+  .nav-links a:hover::after,.nav-links a.active::after { width:100%; }
+  .nav-actions { display:flex; align-items:center; gap:1.1rem; }
+  .nav-icon-btn { background:none; border:none; color:var(--text-soft); cursor:pointer; transition:color .25s; padding:5px; display:flex; align-items:center; }
+  .nav-icon-btn:hover { color:var(--gold); }
+  .cart-badge { position:absolute; top:-4px; right:-6px; background:var(--gold); color:var(--white); font-size:.5rem; font-weight:700; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .hamburger { display:none; background:none; border:none; color:var(--text); font-size:1.35rem; cursor:pointer; }
+
+  /* PAGES */
+  .page { display:none; min-height:100vh; padding-top:72px; animation:fadeIn .35s ease; }
+  .page.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  /* BUTTONS */
+  .btn-primary { background:var(--gold-gradient); color:var(--white); border:none; padding:14px 32px; font-family:'Montserrat',sans-serif; font-size:.69rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:all .3s; position:relative; overflow:hidden; display:inline-block; }
+  .btn-primary::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:rgba(255,255,255,.18); transition:left .4s; }
+  .btn-primary:hover::before { left:100%; }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(200,144,10,.35); }
+  .btn-secondary { background:transparent; color:var(--text); border:2px solid var(--text); padding:13px 32px; font-family:'Montserrat',sans-serif; font-size:.69rem; font-weight:600; letter-spacing:3px; text-transform:uppercase; cursor:pointer; transition:all .3s; }
+  .btn-secondary:hover { border-color:var(--gold); color:var(--gold); transform:translateY(-2px); }
+
+  /* HERO */
+  .hero { min-height:calc(100vh - 72px); display:grid; grid-template-columns:1fr 1fr; background:var(--white); }
+  .hero-left { display:flex; flex-direction:column; justify-content:center; padding:5rem 4rem 5rem 6rem; border-right:1px solid var(--border); }
+  .hero-tag { font-size:.59rem; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:1.5rem; display:flex; align-items:center; gap:12px; }
+  .hero-tag::before { content:''; display:block; width:26px; height:1px; background:var(--gold); }
+  .hero-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,4.5vw,3.9rem); font-weight:900; line-height:1.06; margin-bottom:1.5rem; color:var(--text); }
+  .hero-title .gold { color:var(--gold); }
+  .hero-subtitle { font-family:'Cormorant Garamond',serif; font-size:1.12rem; color:var(--gray); line-height:1.85; margin-bottom:2.5rem; font-style:italic; max-width:420px; }
+  .hero-buttons { display:flex; gap:1rem; flex-wrap:wrap; }
+  .hero-stats { display:flex; gap:2.5rem; margin-top:3rem; padding-top:2rem; border-top:1px solid var(--border); }
+  .hero-stat span:first-child { display:block; font-family:'Playfair Display',serif; font-size:1.75rem; font-weight:700; color:var(--gold); }
+  .hero-stat span:last-child { font-size:.57rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); }
+  .hero-right { background:var(--bg2); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1.5rem; min-height:500px; }
+  .hero-deco { position:absolute; border-radius:50%; border:1px solid var(--border-gold); }
+  .hero-deco-1 { width:260px; height:260px; top:50%; left:50%; transform:translate(-50%,-50%); animation:rotS 22s linear infinite; }
+  .hero-deco-2 { width:360px; height:360px; top:50%; left:50%; transform:translate(-50%,-50%); animation:rotS 34s linear infinite reverse; }
+  @keyframes rotS { from{transform:translate(-50%,-50%) rotate(0deg)} to{transform:translate(-50%,-50%) rotate(360deg)} }
+  .hero-center { text-align:center; position:relative; z-index:2; }
+  .hero-fc { position:absolute; background:var(--white); border:1px solid var(--border-gold); padding:.85rem 1.2rem; box-shadow:var(--shadow); z-index:3; }
+  .hero-fc:nth-of-type(1) { bottom:22%; left:8%; animation:flt 4s ease-in-out infinite; }
+  .hero-fc:nth-of-type(2) { top:22%; right:8%; animation:flt 4s ease-in-out infinite 2s; }
+  @keyframes flt { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  .fc-l { font-size:.49rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:.2rem; }
+  .fc-v { font-family:'Playfair Display',serif; font-size:.92rem; color:var(--text); }
+
+  /* MARQUEE */
+  .marquee-wrap { overflow:hidden; background:var(--gold-gradient); padding:.85rem 0; }
+  .marquee-track { display:flex; animation:mq 22s linear infinite; width:max-content; }
+  .marquee-item { font-size:.61rem; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--white); padding:0 2.8rem; display:flex; align-items:center; gap:1.5rem; white-space:nowrap; }
+  .marquee-item::before { content:'◆'; font-size:.37rem; }
+  @keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* SECTIONS */
+  .section { padding:5rem 6rem; }
+  .section-white { background:var(--white); }
+  .section-alt { background:var(--bg2); }
+  .section-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:3rem; }
+  .section-tag { font-size:.57rem; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:.7rem; display:flex; align-items:center; gap:9px; }
+  .section-tag::before { content:''; display:block; width:20px; height:1px; background:var(--gold); }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,2.8vw,2.5rem); font-weight:700; line-height:1.1; color:var(--text); }
+  .section-link { font-size:.62rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); cursor:pointer; display:flex; align-items:center; gap:8px; transition:gap .3s; border:none; background:none; font-family:'Montserrat',sans-serif; }
+  .section-link:hover { gap:16px; }
+
+  /* CATEGORIES */
+  .category-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:2px; height:470px; }
+  .category-card { position:relative; overflow:hidden; cursor:pointer; }
+  .cat-suit .cat-bg { background:linear-gradient(160deg,#2a1a0a,#1a1005); }
+  .cat-casual .cat-bg { background:linear-gradient(160deg,#0d1a0d,#152515); }
+  .cat-formal .cat-bg { background:linear-gradient(160deg,#0d0d1a,#10101f); }
+  .cat-overlay { position:absolute; inset:0; background:rgba(212,160,23,.07); }
+  .cat-info { position:absolute; bottom:0; left:0; right:0; padding:1.6rem; background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 100%); z-index:2; }
+  .cat-tag { font-size:.51rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:.35rem; }
+  .cat-title { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:#fff; margin-bottom:.3rem; }
+  .cat-count { font-size:.56rem; letter-spacing:2px; color:rgba(255,255,255,.5); text-transform:uppercase; }
+  .cat-icon { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:7rem; opacity:.07; transition:opacity .3s; pointer-events:none; z-index:1; }
+  .category-card:hover .cat-icon { opacity:.13; }
+
+  /* PRODUCT CARDS */
+  .products-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem; }
+  .product-card { background:var(--white); border:1px solid var(--border); position:relative; overflow:hidden; cursor:pointer; transition:all .35s; }
+  .product-card:hover { border-color:var(--gold-light); transform:translateY(-5px); box-shadow:var(--shadow-md); }
+  .product-emoji { font-size:5.5rem; opacity:.3; transition:transform .4s; }
+  .product-card:hover .product-emoji { transform:scale(1.1); opacity:.4; }
+  .product-overlay { position:absolute; inset:0; background:rgba(0,0,0,.42); display:flex; align-items:center; justify-content:center; gap:.7rem; opacity:0; transition:opacity .3s; }
+  .product-card:hover .product-overlay { opacity:1; }
+  .overlay-btn { background:var(--white); color:var(--text); border:none; width:42px; height:42px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .25s; font-size:1rem; }
+  .overlay-btn:hover { background:var(--gold); color:var(--white); transform:scale(1.1); }
+  .product-badge { position:absolute; top:.85rem; left:.85rem; font-size:.51rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:3px 8px; z-index:2; }
+  .badge-new { background:var(--text); color:var(--white); }
+  .badge-sale { background:var(--gold-gradient); color:var(--white); }
+  .badge-premium { background:var(--white); color:var(--gold); border:1px solid var(--gold); }
+  .product-info { padding:1.2rem; }
+  .product-category { font-size:.52rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:.32rem; }
+  .product-name { font-family:'Playfair Display',serif; font-size:.95rem; font-weight:600; color:var(--text); margin-bottom:.7rem; line-height:1.35; }
+  .product-price-row { display:flex; align-items:center; justify-content:space-between; }
+  .product-price { font-size:1.02rem; font-weight:700; color:var(--gold); }
+  .product-price-old { font-size:.76rem; color:var(--gray-light); text-decoration:line-through; margin-left:.38rem; }
+  .star { color:var(--gold); font-size:.6rem; }
+  .star.empty { color:var(--border); }
+
+  /* TESTIMONIALS */
+  .testimonials-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+  .testimonial-card { background:var(--white); border:1px solid var(--border); padding:2rem; position:relative; box-shadow:var(--shadow); }
+  .testimonial-card::before { content:'"'; position:absolute; top:.7rem; right:1.2rem; font-family:'Playfair Display',serif; font-size:5rem; color:var(--gold); opacity:.1; line-height:1; }
+  .testimonial-stars { color:var(--gold); letter-spacing:3px; margin-bottom:.85rem; font-size:.9rem; }
+  .testimonial-text { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1rem; color:var(--text-soft); line-height:1.85; margin-bottom:1.5rem; }
+  .testimonial-author { display:flex; align-items:center; gap:.85rem; }
+  .author-avatar { width:40px; height:40px; border-radius:50%; background:var(--gold-gradient); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.76rem; color:var(--white); flex-shrink:0; }
+  .author-name { font-size:.78rem; font-weight:600; color:var(--text); }
+  .author-role { font-size:.57rem; color:var(--gold); letter-spacing:1px; }
+
+  /* NEWSLETTER */
+  .newsletter-section { padding:0 6rem 5rem; }
+  .newsletter-box { background:var(--text); padding:3.5rem 4rem; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+  .newsletter-title { font-family:'Playfair Display',serif; font-size:1.85rem; font-weight:700; line-height:1.2; margin-bottom:.7rem; color:var(--white); }
+  .newsletter-sub { color:rgba(255,255,255,.55); font-size:.8rem; line-height:1.75; }
+  .newsletter-form { display:flex; width:100%; }
+  .newsletter-input { flex:1; min-width:0; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); border-right:none; padding:13px 16px; color:var(--white); font-family:'Montserrat',sans-serif; font-size:.78rem; outline:none; }
+  .newsletter-input:focus { border-color:var(--gold); }
+  .newsletter-input::placeholder { color:rgba(255,255,255,.38); }
+  .newsletter-btn { background:var(--gold-gradient); border:none; color:var(--white); padding:13px 20px; font-size:.63rem; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; white-space:nowrap; font-family:'Montserrat',sans-serif; flex-shrink:0; }
+  .newsletter-note { font-size:.6rem; color:rgba(255,255,255,.35); margin-top:.55rem; }
+
+  /* FOOTER */
+  footer { background:var(--text); padding:4rem 6rem 2rem; }
+  .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
+  .footer-brand-text { font-family:'Cormorant Garamond',serif; font-style:italic; color:rgba(255,255,255,.45); font-size:.93rem; line-height:1.8; margin:1rem 0 1.5rem; }
+  .footer-socials { display:flex; gap:.7rem; }
+  .social-btn { width:34px; height:34px; border:1px solid rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .3s; background:none; color:rgba(255,255,255,.45); font-size:.76rem; text-decoration:none; }
+  .social-btn:hover { border-color:var(--gold); color:var(--gold); }
+  .footer-heading { font-size:.58rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:1.4rem; }
+  .footer-links { list-style:none; display:flex; flex-direction:column; gap:.7rem; }
+  .footer-links a { color:rgba(255,255,255,.45); text-decoration:none; font-size:.76rem; transition:color .25s; cursor:pointer; }
+  .footer-links a:hover { color:var(--gold); }
+  .footer-bottom { border-top:1px solid rgba(255,255,255,.07); padding-top:1.75rem; display:flex; align-items:center; justify-content:space-between; }
+  .footer-bottom p { font-size:.66rem; color:rgba(255,255,255,.32); }
+
+  /* SHOP PAGE */
+  .shop-header { background:var(--white); border-bottom:1px solid var(--border); padding:2.5rem 6rem; display:flex; align-items:center; justify-content:space-between; }
+  .breadcrumb-row { font-size:.57rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:.4rem; }
+  .breadcrumb-row span { color:var(--gold); }
+  .shop-header h1 { font-family:'Playfair Display',serif; font-size:2.1rem; font-weight:700; color:var(--text); }
+  .shop-layout { display:grid; grid-template-columns:230px 1fr; padding:2rem 6rem 5rem; gap:2rem; }
+  .shop-sidebar { padding-right:2rem; border-right:1px solid var(--border); }
+  .sidebar-section { margin-bottom:2rem; }
+  .sidebar-title { font-size:.57rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:.9rem; padding-bottom:.6rem; border-bottom:1px solid var(--border); }
+  .sidebar-options { display:flex; flex-direction:column; gap:.58rem; }
+  .sidebar-option { display:flex; align-items:center; gap:.7rem; }
+  .sidebar-option label { font-size:.77rem; color:var(--text-soft); cursor:pointer; flex:1; }
+  .sidebar-option span { font-size:.62rem; color:var(--gray-light); }
+  .sidebar-option input[type="checkbox"] { accent-color:var(--gold); cursor:pointer; width:14px; height:14px; flex-shrink:0; }
+  .price-slider { width:100%; accent-color:var(--gold); cursor:pointer; margin:.4rem 0; }
+  .price-labels { display:flex; justify-content:space-between; font-size:.72rem; color:var(--gray); }
+  .shop-toolbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.4rem; padding-bottom:.9rem; border-bottom:1px solid var(--border); }
+  .shop-results { font-size:.72rem; color:var(--gray); }
+  .shop-results strong { color:var(--text); }
+  .toolbar-right { display:flex; align-items:center; gap:.8rem; }
+  .sort-select { background:var(--white); border:1px solid var(--border); color:var(--text); padding:6px 11px; font-size:.69rem; cursor:pointer; outline:none; font-family:'Montserrat',sans-serif; }
+  .view-btn { background:none; border:1px solid var(--border); color:var(--gray); padding:5px 10px; cursor:pointer; font-size:.69rem; transition:all .2s; font-family:'Montserrat',sans-serif; }
+  .view-btn:hover,.view-btn.active { background:var(--gold); color:var(--white); border-color:var(--gold); }
+  .shop-products-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+  .pagination { display:flex; justify-content:center; gap:.4rem; margin-top:2.5rem; }
+  .page-btn { width:38px; height:38px; border:1px solid var(--border); background:var(--white); color:var(--text); font-size:.78rem; cursor:pointer; transition:all .25s; font-family:'Montserrat',sans-serif; font-weight:600; }
+  .page-btn:hover { border-color:var(--gold); color:var(--gold); }
+  .page-btn.active { background:var(--gold-gradient); color:var(--white); border-color:var(--gold); }
+
+  /* PRODUCT DETAIL */
+  .product-detail { padding:2.5rem 6rem 5rem; background:var(--bg); }
+  .back-link { font-size:.59rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); display:inline-flex; align-items:center; gap:6px; cursor:pointer; margin-bottom:1.75rem; transition:color .2s; border:none; background:none; font-family:'Montserrat',sans-serif; }
+  .back-link:hover { color:var(--gold); }
+  .product-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start; }
+  .thumb-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:.5rem; }
+  .thumb { aspect-ratio:1; background:var(--white); border:1px solid var(--border); cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; font-size:1.75rem; overflow:hidden; }
+  .thumb:hover,.thumb.active { border-color:var(--gold); box-shadow:0 0 0 2px var(--gold-light); }
+  .product-detail-category { font-size:.57rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:.55rem; }
+  .product-detail-name { font-family:'Playfair Display',serif; font-size:1.95rem; font-weight:700; line-height:1.15; margin-bottom:.7rem; color:var(--text); }
+  .product-detail-rating { display:flex; align-items:center; gap:.6rem; margin-bottom:1.2rem; }
+  .rating-count { font-size:.71rem; color:var(--gray); }
+  .product-detail-price { font-size:1.85rem; font-weight:700; color:var(--gold); margin-bottom:1.2rem; }
+  .product-detail-desc { font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--gray); font-size:1.03rem; line-height:1.85; margin-bottom:1.6rem; padding-bottom:1.6rem; border-bottom:1px solid var(--border); }
+  .opt-title { font-size:.57rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:.65rem; }
+  .size-grid { display:flex; gap:.45rem; margin-bottom:1.4rem; flex-wrap:wrap; }
+  .size-btn { width:43px; height:43px; border:1px solid var(--border); background:var(--white); color:var(--text-soft); font-size:.71rem; cursor:pointer; transition:all .2s; font-family:'Montserrat',sans-serif; }
+  .size-btn:hover,.size-btn.selected { border-color:var(--gold); color:var(--gold); background:rgba(200,144,10,.07); }
+  .color-grid { display:flex; gap:.7rem; margin-bottom:1.85rem; }
+  .color-swatch { width:30px; height:30px; border-radius:50%; cursor:pointer; border:3px solid transparent; transition:all .2s; outline:2px solid transparent; outline-offset:2px; }
+  .color-swatch.selected { outline-color:var(--gold); }
+  .qty-row { display:flex; align-items:center; gap:1rem; margin-bottom:1.6rem; }
+  .qty-control { display:flex; align-items:center; border:1px solid var(--border); }
+  .qty-btn { width:40px; height:42px; background:none; border:none; color:var(--text); font-size:1.2rem; cursor:pointer; transition:all .2s; }
+  .qty-btn:hover { background:var(--gold); color:var(--white); }
+  .qty-input { width:46px; height:42px; background:none; border:none; border-left:1px solid var(--border); border-right:1px solid var(--border); color:var(--text); text-align:center; font-size:.88rem; font-family:'Montserrat',sans-serif; }
+  .detail-actions { display:flex; gap:1rem; margin-bottom:1.6rem; }
+  .detail-actions .btn-primary { flex:1; padding:15px; }
+  .wishlist-btn { width:50px; border:1px solid var(--border); background:var(--white); color:var(--text-soft); cursor:pointer; transition:all .3s; font-size:1.15rem; }
+  .wishlist-btn:hover { border-color:var(--gold); color:var(--gold); }
+  .product-features { display:flex; flex-direction:column; gap:.62rem; padding-top:1.4rem; border-top:1px solid var(--border); }
+  .feature-item { display:flex; align-items:center; gap:.7rem; font-size:.74rem; color:var(--text-soft); }
+  .feature-icon { color:var(--gold); font-weight:700; }
+
+  /* CART */
+  .cart-wrap { padding:2.5rem 6rem 5rem; background:var(--bg); }
+  .cart-grid { display:grid; grid-template-columns:1fr 355px; gap:2rem; align-items:start; }
+  .cart-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.6rem; padding-bottom:.9rem; border-bottom:1px solid var(--border); }
+  .cart-title { font-family:'Playfair Display',serif; font-size:1.65rem; font-weight:700; color:var(--text); }
+  .cart-count { font-size:.62rem; color:var(--gray); letter-spacing:2px; text-transform:uppercase; margin-top:.2rem; }
+  .cart-items { display:flex; flex-direction:column; gap:1px; }
+  .cart-item { display:grid; grid-template-columns:88px 1fr auto; gap:1.2rem; padding:1.2rem; background:var(--white); border:1px solid var(--border); border-bottom:none; align-items:center; }
+  .cart-item:last-child { border-bottom:1px solid var(--border); }
+  .cart-item-img { width:88px; height:108px; background:var(--bg2); display:flex; align-items:center; justify-content:center; font-size:2.6rem; overflow:hidden; }
+  .cart-item-img img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+  .cart-item-name { font-family:'Playfair Display',serif; font-size:.93rem; margin-bottom:.3rem; color:var(--text); }
+  .cart-item-meta { font-size:.66rem; color:var(--gray); letter-spacing:1px; margin-bottom:.9rem; }
+  .cart-item-right { text-align:right; display:flex; flex-direction:column; align-items:flex-end; gap:.7rem; }
+  .cart-item-price { font-size:1.02rem; font-weight:700; color:var(--gold); }
+  .remove-btn { background:none; border:none; color:var(--gray-light); cursor:pointer; font-size:.62rem; letter-spacing:1px; text-transform:uppercase; transition:color .2s; }
+  .remove-btn:hover { color:#e74c3c; }
+  .cart-summary { background:var(--white); border:1px solid var(--border); padding:1.85rem; position:sticky; top:85px; box-shadow:var(--shadow); }
+  .summary-title { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; margin-bottom:1.4rem; padding-bottom:.9rem; border-bottom:1px solid var(--border); color:var(--text); }
+  .summary-row { display:flex; justify-content:space-between; font-size:.77rem; color:var(--text-soft); margin-bottom:.7rem; }
+  .summary-row.total { font-size:.97rem; font-weight:700; color:var(--text); border-top:1px solid var(--border); padding-top:.9rem; margin-top:.4rem; }
+  .summary-row.total span:last-child { color:var(--gold); }
+  .coupon-row { display:flex; margin:1.2rem 0; }
+  .coupon-input { flex:1; min-width:0; background:var(--bg2); border:1px solid var(--border); border-right:none; padding:10px 12px; color:var(--text); font-family:'Montserrat',sans-serif; font-size:.73rem; outline:none; }
+  .coupon-btn { background:var(--gold-gradient); border:none; color:var(--white); padding:10px 13px; font-size:.61rem; font-weight:700; letter-spacing:1px; cursor:pointer; font-family:'Montserrat',sans-serif; white-space:nowrap; flex-shrink:0; }
+  .empty-cart { text-align:center; padding:5rem 2rem; }
+  .empty-cart-icon { font-size:4.5rem; margin-bottom:1.4rem; opacity:.28; }
+  .empty-cart h2 { font-family:'Playfair Display',serif; font-size:1.45rem; margin-bottom:.7rem; color:var(--text); }
+  .empty-cart p { color:var(--gray); font-size:.8rem; margin-bottom:1.85rem; }
+
+  /* ABOUT */
+  .about-hero { height:42vh; min-height:340px; background:var(--text); display:flex; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; }
+  .about-hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 30% 50%,rgba(212,160,23,.14) 0%,transparent 60%); }
+  .about-hero-content { position:relative; z-index:1; }
+  .about-hero-title { font-family:'Playfair Display',serif; font-size:2.9rem; font-weight:900; color:var(--white); margin-bottom:.7rem; }
+  .about-hero-sub { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.08rem; color:rgba(255,255,255,.5); }
+  .about-body { padding:4.5rem 6rem; }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; margin-bottom:4.5rem; }
+  .about-visual { height:410px; background:var(--bg2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+  .about-big-letter { font-family:'Playfair Display',serif; font-size:11rem; font-weight:900; color:var(--gold); opacity:.08; line-height:1; }
+  .about-icon-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:4.5rem; opacity:.22; }
+  .about-text h2 { font-family:'Playfair Display',serif; font-size:1.9rem; font-weight:700; margin-bottom:1.2rem; line-height:1.2; color:var(--text); }
+  .about-text p { font-family:'Cormorant Garamond',serif; font-size:1.03rem; color:var(--text-soft); line-height:1.9; margin-bottom:.9rem; font-style:italic; }
+  .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; margin-bottom:4rem; }
+  .value-card { background:var(--white); border:1px solid var(--border); padding:1.85rem; text-align:center; transition:all .3s; box-shadow:var(--shadow); }
+  .value-card:hover { border-color:var(--gold); transform:translateY(-4px); box-shadow:var(--shadow-md); }
+  .value-icon { font-size:1.9rem; margin-bottom:.9rem; }
+  .value-title { font-family:'Playfair Display',serif; font-size:1.02rem; margin-bottom:.55rem; color:var(--text); }
+  .value-desc { font-size:.76rem; color:var(--gray); line-height:1.7; }
+  .team-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem; }
+  .team-card { text-align:center; cursor:pointer; }
+  .team-avatar { width:100%; aspect-ratio:1; background:var(--bg2); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:2.8rem; margin-bottom:.9rem; transition:all .3s; overflow:hidden; }
+  .team-card:hover .team-avatar { border-color:var(--gold); box-shadow:0 6px 20px rgba(200,144,10,.15); }
+  .team-avatar img { width:100%; height:100%; object-fit:cover; object-position:top center; }
+  .team-name { font-family:'Playfair Display',serif; font-size:.93rem; margin-bottom:.2rem; color:var(--text); }
+  .team-role { font-size:.58rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); }
+
+  /* CONTACT */
+  .contact-layout { display:grid; grid-template-columns:1fr 1fr; min-height:calc(100vh - 72px); }
+  .contact-left { background:var(--text); padding:4.5rem; display:flex; flex-direction:column; justify-content:center; }
+  .contact-right { padding:4.5rem; background:var(--white); }
+  .contact-info-items { display:flex; flex-direction:column; gap:1.85rem; margin-top:2.3rem; }
+  .contact-info-item { display:flex; align-items:flex-start; gap:1.2rem; }
+  .contact-info-icon { width:42px; height:42px; background:rgba(200,144,10,.14); border:1px solid rgba(200,144,10,.28); display:flex; align-items:center; justify-content:center; font-size:.97rem; flex-shrink:0; }
+  .contact-info-title { font-size:.57rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:.22rem; }
+  .contact-info-value { font-size:.85rem; color:rgba(255,255,255,.55); line-height:1.65; }
+  .form-group { margin-bottom:1.15rem; }
+  .form-label { font-size:.57rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:.42rem; }
+  .form-input,.form-textarea { width:100%; background:var(--bg2); border:1px solid var(--border); padding:12px 14px; color:var(--text); font-family:'Montserrat',sans-serif; font-size:.79rem; outline:none; transition:border-color .3s; resize:none; }
+  .form-input:focus,.form-textarea:focus { border-color:var(--gold); background:var(--white); }
+  .form-input::placeholder,.form-textarea::placeholder { color:var(--gray-light); }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+
+  /* BLOG */
+  .blog-header-section { background:var(--white); padding:3rem 6rem; border-bottom:1px solid var(--border); }
+  .blog-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.7rem; padding:3.5rem 6rem 5rem; background:var(--bg); }
+  .blog-card-featured { grid-column:span 2; }
+  .blog-card { background:var(--white); border:1px solid var(--border); overflow:hidden; cursor:pointer; transition:all .3s; box-shadow:var(--shadow); }
+  .blog-card:hover { border-color:var(--gold-light); transform:translateY(-4px); box-shadow:var(--shadow-md); }
+  .blog-img { height:195px; display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative; }
+  .blog-card-featured .blog-img { height:295px; }
+  .bi-1 { background:linear-gradient(135deg,#f5e8c0,#e8d080); }
+  .bi-2 { background:linear-gradient(135deg,#c0d5f0,#8090d0); }
+  .bi-3 { background:linear-gradient(135deg,#c0e8d0,#80b890); }
+  .bi-4 { background:linear-gradient(135deg,#f0c0d0,#d08090); }
+  .blog-emoji { position:relative; z-index:1; font-size:4rem; }
+  .blog-card-featured .blog-emoji { font-size:5rem; }
+  .blog-content { padding:1.45rem; }
+  .blog-tag { font-size:.51rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:.62rem; }
+  .blog-title { font-family:'Playfair Display',serif; font-size:1.02rem; font-weight:600; line-height:1.4; margin-bottom:.62rem; color:var(--text); transition:color .2s; }
+  .blog-card:hover .blog-title { color:var(--gold); }
+  .blog-excerpt { font-size:.74rem; color:var(--gray); line-height:1.7; margin-bottom:1.05rem; }
+  .blog-meta { display:flex; align-items:center; gap:.7rem; font-size:.61rem; color:var(--gray-light); }
+  .blog-dot { color:var(--gold); }
+
+  /* TOAST */
+  .toast { position:fixed; bottom:2rem; right:2rem; background:var(--text); border:1px solid var(--gold); padding:.95rem 1.4rem; z-index:9999; display:flex; align-items:center; gap:.7rem; opacity:0; transform:translateY(20px); transition:all .3s; pointer-events:none; max-width:320px; }
+  .toast.show { opacity:1; transform:translateY(0); }
+  .toast-icon { color:var(--gold); }
+  .toast-msg { font-size:.76rem; color:var(--white); }
+
+  /* RESPONSIVE */
+  @media(max-width:1100px){
+    nav{padding:0 2rem;}
+    .nav-links{gap:1.5rem;}
+    .section{padding:4rem 3rem;}
+    .hero-left{padding:3rem 2.5rem 3rem 3rem;}
+    .shop-layout{padding:2rem 3rem 4rem;grid-template-columns:195px 1fr;}
+    .shop-header{padding:2rem 3rem;}
+    .products-grid{grid-template-columns:repeat(2,1fr);}
+    .shop-products-grid{grid-template-columns:repeat(2,1fr);}
+    .category-grid{height:380px;}
+    .testimonials-grid{grid-template-columns:1fr;}
+    .newsletter-section{padding:0 3rem 4rem;}
+    .newsletter-box{grid-template-columns:1fr;padding:2.5rem 2rem;gap:2rem;}
+    footer{padding:3rem 3rem 2rem;}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+    .about-body{padding:3.5rem 3rem;}
+    .about-grid{grid-template-columns:1fr;gap:3rem;}
+    .team-grid{grid-template-columns:repeat(2,1fr);}
+    .values-grid{grid-template-columns:1fr 1fr;}
+    .product-detail{padding:2rem 3rem 4rem;}
+    .product-detail-grid{grid-template-columns:1fr;gap:2.5rem;}
+    .cart-wrap{padding:2rem 3rem 4rem;}
+    .cart-grid{grid-template-columns:1fr;gap:1.5rem;}
+    .contact-layout{grid-template-columns:1fr;}
+    .contact-left,.contact-right{padding:3rem;}
+    .blog-header-section{padding:2.5rem 3rem;}
+    .blog-grid{grid-template-columns:1fr 1fr;padding:2.5rem 3rem 4rem;}
+    .blog-card-featured{grid-column:span 2;}
+  }
+  @media(max-width:700px){
+    .nav-links{display:none;}
+    .hamburger{display:block;}
+    .hero{grid-template-columns:1fr;}
+    .hero-right{display:none;}
+    .products-grid,.shop-products-grid{grid-template-columns:1fr;}
+    .category-grid{grid-template-columns:1fr;height:auto;}
+    .category-card{height:175px;}
+    .blog-grid{grid-template-columns:1fr;padding:1.5rem 1.5rem 3rem;}
+    .blog-card-featured{grid-column:span 1;}
+    .footer-grid{grid-template-columns:1fr;}
+    .shop-layout{grid-template-columns:1fr;padding:1.5rem;}
+    .shop-sidebar{display:none;}
+    .form-row{grid-template-columns:1fr;}
+    .newsletter-section{padding:0 1.5rem 3rem;}
+    .newsletter-box{padding:2rem 1.5rem;}
+    .newsletter-form{flex-direction:column;}
+    .newsletter-input{border-right:1px solid rgba(255,255,255,.18);}
+    .newsletter-btn{width:100%;padding:13px;}
+    .section{padding:3rem 1.5rem;}
+    .hero-left{padding:2.5rem 1.5rem;}
+    .hero-buttons{flex-direction:column;}
+    .hero-buttons .btn-primary,.hero-buttons .btn-secondary{width:100%;text-align:center;}
+    .about-body{padding:3rem 1.5rem;}
+    .values-grid{grid-template-columns:1fr;}
+    .product-detail{padding:1.5rem 1.5rem 3rem;}
+    .cart-wrap{padding:1.5rem 1.5rem 3rem;}
+    footer{padding:2.5rem 1.5rem 1.5rem;}
+    .shop-header{padding:1.5rem;}
+    .blog-header-section{padding:2rem 1.5rem;}
+    .contact-left,.contact-right{padding:2.5rem 1.5rem;}
+    .cart-item{grid-template-columns:65px 1fr auto;gap:.7rem;}
+    .cart-item-img{width:65px;height:80px;}
+  }
+</style>
+
+</head>
+<body>
+
+<!-- ================================================================
+     CHECKOUT MODAL (Paystack)
+================================================================ -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3>Complete Your Order</h3>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-order-summary" id="modalOrderSummary">
+        <div class="modal-order-title">Order Summary</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-input" id="checkoutName" placeholder="e.g. Chidi Okafor">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" id="checkoutEmail" placeholder="e.g. chidi@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone Number</label>
+        <input type="tel" class="form-input" id="checkoutPhone" placeholder="e.g. 08012345678">
+      </div>
+      <button class="pay-btn" onclick="payWithPaystack()">
+        🔒 &nbsp; Pay Securely with Paystack
+      </button>
+      <p class="pay-note">SSL Encrypted · Your data is 100% secure · Powered by Paystack</p>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay" id="searchOverlay" onclick="closeSearchOverlay(event)">
+  <div class="search-box" onclick="event.stopPropagation()">
+    <div class="search-box-header">
+      <span>Search Products</span>
+      <button class="search-close" onclick="toggleSearch()">✕</button>
+    </div>
+    <div class="search-input-row">
+      <input type="text" id="searchInput" placeholder="Search suits, shirts, accessories..." onkeydown="if(event.key==='Enter')doSearch()">
+      <button onclick="doSearch()">→</button>
+    </div>
+    <div class="search-tags">
+      <span class="search-tag-label">Popular:</span>
+      <span class="search-tag" onclick="searchFor('Suits')">Suits</span>
+      <span class="search-tag" onclick="searchFor('Shirts')">Shirts</span>
+      <span class="search-tag" onclick="searchFor('Casual')">Casual</span>
+      <span class="search-tag" onclick="searchFor('Accessories')">Accessories</span>
+      <span class="search-tag" onclick="searchFor('Jackets')">Jackets</span>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <span style="font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);">Menu</span>
+    <button class="mobile-menu-close" onclick="closeMobileMenu()">✕</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a onclick="showPage('home');closeMobileMenu()">Home</a>
+    <a onclick="showPage('shop');closeMobileMenu()">Shop</a>
+    <a onclick="showPage('about');closeMobileMenu()">About</a>
+    <a onclick="showPage('blog');closeMobileMenu()">Blog</a>
+    <a onclick="showPage('contact');closeMobileMenu()">Contact</a>
+    <a onclick="showPage('cart');closeMobileMenu()">Cart 🛒</a>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav id="mainNav">
+  <div class="nav-logo" onclick="showPage('home')">
+    <svg width="40" height="44" viewBox="0 0 100 110" fill="none">
+      <defs><linearGradient id="ng" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0B429"/><stop offset="50%" stop-color="#C8900A"/><stop offset="100%" stop-color="#A07810"/></linearGradient></defs>
+      <polygon points="38,12 45,22 50,10 55,22 62,12 65,28 35,28" fill="url(#ng)"/>
+      <path d="M20,28 L80,28 L80,72 L50,90 L20,72 Z" fill="url(#ng)"/>
+      <rect x="20" y="37" width="60" height="8" fill="#F9F7F3"/>
+      <rect x="20" y="55" width="60" height="8" fill="#F9F7F3"/>
+      <text x="50" y="62" font-family="serif" font-size="28" font-weight="900" fill="white" text-anchor="middle">S</text>
+    </svg>
+    <div class="nav-logo-text"><span>SMART</span><span>EXQUISITE</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('shop')" id="nav-shop">Shop</a></li>
+    <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+    <li><a onclick="showPage('blog')" id="nav-blog">Blog</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-icon-btn" onclick="toggleSearch()" title="Search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="nav-icon-btn" onclick="showPage('cart')" title="Cart" style="position:relative">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <button class="hamburger" onclick="openMobileMenu()">☰</button>
+  </div>
+</nav>
+
+<!-- ==================== HOME ==================== -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">New Collection 2025</div>
+      <h1 class="hero-title">Dress Like<br><span class="gold">Royalty.</span><br>Live with Style.</h1>
+      <p class="hero-subtitle">Smart Exquisite redefines men's fashion — where timeless elegance meets modern refinement. Every piece is crafted for the man who demands excellence.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="showPage('shop')">Explore Collection</button>
+        <button class="btn-secondary" onclick="showPage('about')">Our Story</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span>500+</span><span>Styles</span></div>
+        <div class="hero-stat"><span>10K+</span><span>Customers</span></div>
+        <div class="hero-stat"><span>5★</span><span>Rated</span></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <!-- ✅ HERO IMAGE: Replace with your model/outfit photo -->
+      <!-- If no image, the decorative circles show instead -->
+      <div class="hero-deco hero-deco-1"></div>
+      <div class="hero-deco hero-deco-2"></div>
+      <div id="heroImageContainer" class="hero-center">
+        <!-- Filled by JS based on IMAGES.hero config below -->
+      </div>
+      <div class="hero-fc"><div class="fc-l">New Arrivals</div><div class="fc-v">Spring '25</div></div>
+      <div class="hero-fc"><div class="fc-l">Premium Quality</div><div class="fc-v">Certified ✓</div></div>
+    </div>
+  </section>
+
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-item">Free Delivery in Lagos</span>
+      <span class="marquee-item">New Arrivals Weekly</span>
+      <span class="marquee-item">Premium Men's Fashion</span>
+      <span class="marquee-item">Members Discount</span>
+      <span class="marquee-item">Secure Paystack Checkout</span>
+      <span class="marquee-item">Easy Returns</span>
+      <span class="marquee-item">Free Delivery in Lagos</span>
+      <span class="marquee-item">New Arrivals Weekly</span>
+      <span class="marquee-item">Premium Men's Fashion</span>
+      <span class="marquee-item">Members Discount</span>
+      <span class="marquee-item">Secure Paystack Checkout</span>
+      <span class="marquee-item">Easy Returns</span>
+    </div>
+  </div>
+
+  <section class="section section-white">
+    <div class="section-header">
+      <div><div class="section-tag">Browse</div><h2 class="section-title">Shop by<br>Category</h2></div>
+      <button class="section-link" onclick="showPage('shop')">View All <span>→</span></button>
+    </div>
+    <div class="category-grid">
+      <div class="category-card cat-suit" onclick="showPage('shop')">
+        <!-- ✅ CATEGORY IMAGE: Set in IMAGES.categories.suits below -->
+        <div class="cat-bg" id="catBgSuits"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-icon">🤵</div>
+        <div class="cat-info"><div class="cat-tag">Premium Collection</div><div class="cat-title">Luxury Suits</div><div class="cat-count">48 Products</div></div>
+      </div>
+      <div class="category-card cat-casual" onclick="showPage('shop')">
+        <div class="cat-bg" id="catBgCasual"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-icon">👕</div>
+        <div class="cat-info"><div class="cat-tag">Everyday Style</div><div class="cat-title">Casual Wear</div><div class="cat-count">120 Products</div></div>
+      </div>
+      <div class="category-card cat-formal" onclick="showPage('shop')">
+        <div class="cat-bg" id="catBgFormal"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-icon">👔</div>
+        <div class="cat-info"><div class="cat-tag">Office Ready</div><div class="cat-title">Formal Wear</div><div class="cat-count">76 Products</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="section-header">
+      <div><div class="section-tag">Handpicked</div><h2 class="section-title">Featured<br>Products</h2></div>
+      <button class="section-link" onclick="showPage('shop')">View All <span>→</span></button>
+    </div>
+    <div class="products-grid" id="featuredProducts"></div>
+  </section>
+
+  <section class="section section-white">
+    <div class="section-header">
+      <div><div class="section-tag">Reviews</div><h2 class="section-title">What Our<br>Clients Say</h2></div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">Smart Exquisite transformed my wardrobe entirely. The quality of their suits is unmatched — I receive compliments everywhere I go.</p><div class="testimonial-author"><div class="author-avatar">JM</div><div><div class="author-name">James Mitchell</div><div class="author-role">Business Executive</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">The attention to detail is extraordinary. From the packaging to the fabric, every aspect exudes luxury. My go-to brand for formal occasions.</p><div class="testimonial-author"><div class="author-avatar">DK</div><div><div class="author-name">David Kwame</div><div class="author-role">Creative Director</div></div></div></div>
+      <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">I've tried many luxury brands, but Smart Exquisite stands apart. Their style philosophy resonates with how I want to present myself.</p><div class="testimonial-author"><div class="author-avatar">RA</div><div><div class="author-name">Robert Asante</div><div class="author-role">Entrepreneur</div></div></div></div>
+    </div>
+  </section>
+
+  <div class="newsletter-section">
+    <div class="newsletter-box">
+      <div>
+        <div class="section-tag" style="color:rgba(200,144,10,.85);">Stay Updated</div>
+        <h2 class="newsletter-title">Join the Smart<br>Exquisite Circle</h2>
+        <p class="newsletter-sub">Get exclusive access to new arrivals, member-only offers, and style guides curated for the modern gentleman.</p>
+      </div>
+      <div>
+        <div class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Your email address" id="newsletterEmail">
+          <button class="newsletter-btn" onclick="subscribeNewsletter()">Subscribe</button>
+        </div>
+        <p class="newsletter-note">No spam. Unsubscribe at any time.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:.75rem;">
+          <svg width="34" height="38" viewBox="0 0 100 110" fill="none"><defs><linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0B429"/><stop offset="100%" stop-color="#A07810"/></linearGradient></defs><polygon points="38,12 45,22 50,10 55,22 62,12 65,28 35,28" fill="url(#fg)"/><path d="M20,28 L80,28 L80,72 L50,90 L20,72 Z" fill="url(#fg)"/><rect x="20" y="37" width="60" height="8" fill="#0A0A0A"/><rect x="20" y="55" width="60" height="8" fill="#0A0A0A"/><text x="50" y="62" font-family="serif" font-size="28" font-weight="900" fill="white" text-anchor="middle">S</text></svg>
+          <div class="nav-logo-text"><span style="color:#fff;">SMART</span><span>EXQUISITE</span></div>
+        </div>
+        <p class="footer-brand-text">Redefining men's fashion with timeless elegance and modern refinement. Crafted for those who demand only the finest.</p>
+        <div class="footer-socials">
+          <a class="social-btn" href="#" onclick="showToast('Opening Facebook...')">f</a>
+          <a class="social-btn" href="#" onclick="showToast('Opening X / Twitter...')">𝕏</a>
+          <a class="social-btn" href="#" onclick="showToast('Opening Instagram...')">◎</a>
+          <a class="social-btn" href="#" onclick="showToast('Opening Pinterest...')">P</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <ul class="footer-links"><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('shop')">Shop</a></li><li><a onclick="showPage('about')">About Us</a></li><li><a onclick="showPage('blog')">Blog</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-heading">Collections</div>
+        <ul class="footer-links"><li><a onclick="showPage('shop')">Luxury Suits</a></li><li><a onclick="showPage('shop')">Formal Wear</a></li><li><a onclick="showPage('shop')">Casual Collection</a></li><li><a onclick="showPage('shop')">Accessories</a></li><li><a onclick="showPage('shop')">New Arrivals</a></li></ul>
+      </div>
+      <div>
+        <div class="footer-heading">Customer Care</div>
+        <ul class="footer-links"><li><a onclick="showPage('contact')">Help Center</a></li><li><a onclick="showToast('Size Guide: XS–XXL available')">Size Guide</a></li><li><a onclick="showToast('Easy 7-day return policy')">Returns Policy</a></li><li><a onclick="showToast('Free delivery within Lagos')">Shipping Info</a></li><li><a onclick="showToast('Enter your order ID to track your package')">Track Order</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>© 2025 Smart Exquisite. All rights reserved.</p><p>Privacy Policy · Terms of Service</p></div>
+  </footer>
+</div>
+
+<!-- ==================== SHOP ==================== -->
+<div class="page" id="page-shop">
+  <div class="shop-header">
+    <div><div class="breadcrumb-row">Home · <span>Shop</span></div><h1>Our Collection</h1></div>
+    <div class="toolbar-right">
+      <label style="font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);">Sort:</label>
+      <select class="sort-select" onchange="sortProducts(this.value)">
+        <option value="featured">Featured</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="newest">Newest</option>
+      </select>
+    </div>
+  </div>
+  <div class="shop-layout">
+    <div class="shop-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Category</div>
+        <div class="sidebar-options">
+          <div class="sidebar-option"><input type="checkbox" id="cat1" checked onchange="filterProducts()"><label for="cat1">Suits</label><span>48</span></div>
+          <div class="sidebar-option"><input type="checkbox" id="cat2" checked onchange="filterProducts()"><label for="cat2">Formal Shirts</label><span>76</span></div>
+          <div class="sidebar-option"><input type="checkbox" id="cat3" checked onchange="filterProducts()"><label for="cat3">Casual Wear</label><span>120</span></div>
+          <div class="sidebar-option"><input type="checkbox" id="cat4" checked onchange="filterProducts()"><label for="cat4">Accessories</label><span>34</span></div>
+          <div class="sidebar-option"><input type="checkbox" id="cat5" checked onchange="filterProducts()"><label for="cat5">Trousers</label><span>58</span></div>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Price Range</div>
+        <input type="range" class="price-slider" min="0" max="600000" value="600000" id="priceSlider" oninput="updatePrice(this.value)">
+        <div class="price-labels"><span>₦0</span><span id="priceMax">₦600,000</span></div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Size</div>
+        <div class="sidebar-options">
+          <div class="sidebar-option"><input type="checkbox" id="sXS"><label for="sXS">XS</label></div>
+          <div class="sidebar-option"><input type="checkbox" id="sS"><label for="sS">S</label></div>
+          <div class="sidebar-option"><input type="checkbox" id="sM" checked><label for="sM">M</label></div>
+          <div class="sidebar-option"><input type="checkbox" id="sL" checked><label for="sL">L</label></div>
+          <div class="sidebar-option"><input type="checkbox" id="sXL"><label for="sXL">XL</label></div>
+          <div class="sidebar-option"><input type="checkbox" id="sXXL"><label for="sXXL">XXL</label></div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="applyFilters()" style="width:100%;margin-top:.5rem;">Apply Filters</button>
+    </div>
+    <div>
+      <div class="shop-toolbar">
+        <div class="shop-results">Showing <strong id="productCount">8</strong> of <strong id="productTotal">24</strong> products</div>
+        <div class="toolbar-right">
+          <button class="view-btn active" id="view3" onclick="setGridCols(3,this)">3</button>
+          <button class="view-btn" id="view2" onclick="setGridCols(2,this)">2</button>
+        </div>
+      </div>
+      <div class="shop-products-grid" id="shopProducts"></div>
+      <div class="pagination" id="shopPagination"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PRODUCT DETAIL ==================== -->
+<div class="page" id="page-product">
+  <div class="product-detail">
+    <button class="back-link" onclick="showPage('shop')">← Back to Shop</button>
+    <div class="product-detail-grid">
+      <div>
+        <div class="main-product-img" id="pdMainImg"></div>
+        <div class="thumb-grid" id="pdThumbs"></div>
+      </div>
+      <div>
+        <div class="product-detail-category" id="pdCat">Luxury Suits</div>
+        <h1 class="product-detail-name" id="pdName">Premium Italian Wool Suit</h1>
+        <div class="product-detail-rating"><span style="color:var(--gold);letter-spacing:2px;font-size:.95rem;">★★★★★</span><span class="rating-count">(128 reviews)</span></div>
+        <div class="product-detail-price" id="pdPrice">₦349,000</div>
+        <p class="product-detail-desc" id="pdDesc">Crafted from the finest Italian wool, this suit defines modern sophistication. Tailored with precision for an impeccable silhouette that commands attention in any room.</p>
+        <div class="opt-title">Select Size</div>
+        <div class="size-grid">
+          <button class="size-btn" onclick="selectSize(this)">XS</button>
+          <button class="size-btn" onclick="selectSize(this)">S</button>
+          <button class="size-btn selected" onclick="selectSize(this)">M</button>
+          <button class="size-btn" onclick="selectSize(this)">L</button>
+          <button class="size-btn" onclick="selectSize(this)">XL</button>
+          <button class="size-btn" onclick="selectSize(this)">XXL</button>
+        </div>
+        <div class="opt-title">Colour</div>
+        <div class="color-grid">
+          <div class="color-swatch selected" style="background:#1a1a1a;" onclick="selectColor(this)" title="Black"></div>
+          <div class="color-swatch" style="background:#2c3e50;" onclick="selectColor(this)" title="Navy"></div>
+          <div class="color-swatch" style="background:#4a3728;" onclick="selectColor(this)" title="Brown"></div>
+          <div class="color-swatch" style="background:#888;" onclick="selectColor(this)" title="Grey"></div>
+        </div>
+        <div class="opt-title">Quantity</div>
+        <div class="qty-row">
+          <div class="qty-control">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <input type="number" class="qty-input" value="1" min="1" max="10" id="qtyInput">
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+        </div>
+        <div class="detail-actions">
+          <button class="btn-primary" onclick="addCurrentToCart()">Add to Cart</button>
+          <button class="wishlist-btn" onclick="showToast('Added to wishlist ♥')">♡</button>
+        </div>
+        <div class="product-features">
+          <div class="feature-item"><span class="feature-icon">✓</span> Free delivery within Lagos</div>
+          <div class="feature-item"><span class="feature-icon">✓</span> 7-day easy returns</div>
+          <div class="feature-item"><span class="feature-icon">✓</span> Authenticity guaranteed</div>
+          <div class="feature-item"><span class="feature-icon">✓</span> Secure Paystack checkout</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CART ==================== -->
+<div class="page" id="page-cart">
+  <div class="cart-wrap">
+    <div class="cart-grid">
+      <div>
+        <div class="cart-header">
+          <div><h1 class="cart-title">Your Cart</h1><div class="cart-count" id="cartCountLabel">0 items</div></div>
+          <button class="section-link" onclick="showPage('shop')">← Continue Shopping</button>
+        </div>
+        <div id="cartItemsContainer"></div>
+      </div>
+      <div class="cart-summary">
+        <div class="summary-title">Order Summary</div>
+        <div class="summary-row"><span>Subtotal</span><span id="summarySubtotal">₦0.00</span></div>
+        <div class="summary-row"><span>Delivery</span><span id="summaryShipping">₦0.00</span></div>
+        <div class="summary-row"><span>VAT (7.5%)</span><span id="summaryTax">₦0.00</span></div>
+        <div class="coupon-row">
+          <input type="text" class="coupon-input" placeholder="Coupon code (try SMART10)" id="couponInput">
+          <button class="coupon-btn" onclick="applyCoupon()">Apply</button>
+        </div>
+        <div class="summary-row total"><span>Total</span><span id="summaryTotal">₦0.00</span></div>
+        <button class="btn-primary" onclick="checkout()" style="width:100%;padding:15px;margin-top:1.2rem;">Proceed to Checkout</button>
+        <p style="font-size:.61rem;color:var(--gray-light);text-align:center;margin-top:.85rem;">🔒 Secured by Paystack</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ABOUT ==================== -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="about-hero-bg"></div>
+    <div class="about-hero-content">
+      <div class="section-tag" style="justify-content:center;color:rgba(200,144,10,.85);">Our Story</div>
+      <h1 class="about-hero-title">The Smart <span style="color:var(--gold)">Exquisite</span> Journey</h1>
+      <p class="about-hero-sub">Where passion for style meets pursuit of excellence</p>
+    </div>
+  </div>
+  <div class="about-body">
+    <div class="about-grid">
+      <div class="about-visual" id="aboutVisual">
+        <!-- ✅ ABOUT IMAGE: Set in IMAGES.about below -->
+        <div class="about-big-letter">S</div>
+        <div class="about-icon-center">🤵</div>
+        <div style="position:absolute;bottom:1.4rem;right:1.4rem;text-align:right;z-index:2;">
+          <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--gold);opacity:.45;">2025</div>
+          <div style="font-size:.56rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray);">Founded</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-tag">Who We Are</div>
+        <h2>Crafted for Men<br>Who Define Excellence</h2>
+        <p>Smart Exquisite was born from a singular vision: to provide men with fashion that doesn't just look exceptional, but feels exceptional. We set out to bridge the gap between luxury and accessibility.</p>
+        <p>Every garment in our collection is curated with obsessive attention to detail — from the choice of fabric to the final stitch. We believe that how you dress is an expression of who you are.</p>
+        <p>Today, Smart Exquisite serves discerning gentlemen across Nigeria, each united by their commitment to style, quality, and the art of dressing well.</p>
+        <button class="btn-primary" onclick="showPage('shop')" style="margin-top:1.4rem;">Shop The Collection</button>
+      </div>
+    </div>
+    <div style="text-align:center;margin-bottom:2.4rem;"><div class="section-tag" style="justify-content:center;">Our Values</div><h2 class="section-title">What Drives Us</h2></div>
+    <div class="values-grid">
+      <div class="value-card"><div class="value-icon">⚜️</div><div class="value-title">Uncompromising Quality</div><p class="value-desc">Every piece is sourced from premium fabrics and crafted with meticulous attention to detail that defines true luxury.</p></div>
+      <div class="value-card"><div class="value-icon">🎨</div><div class="value-title">Timeless Design</div><p class="value-desc">We create styles that transcend seasons — classics with modern sensibility that remain relevant year after year.</p></div>
+      <div class="value-card"><div class="value-icon">🤝</div><div class="value-title">Client First</div><p class="value-desc">Your satisfaction is our priority. From selection to delivery, we ensure an experience as exquisite as our products.</p></div>
+    </div>
+    <div style="text-align:center;margin-bottom:2.4rem;"><div class="section-tag" style="justify-content:center;">The Team</div><h2 class="section-title">Meet the Minds<br>Behind the Brand</h2></div>
+    <div class="team-grid">
+      <!-- ✅ TEAM PHOTOS: Set in IMAGES.team below -->
+      <div class="team-card"><div class="team-avatar" id="teamAvatar1">👑</div><div class="team-name">Emmanuel Asante</div><div class="team-role">Founder & CEO</div></div>
+      <div class="team-card"><div class="team-avatar" id="teamAvatar2">✂️</div><div class="team-name">Sophie Laurent</div><div class="team-role">Creative Director</div></div>
+      <div class="team-card"><div class="team-avatar" id="teamAvatar3">📐</div><div class="team-name">Marcus Reid</div><div class="team-role">Head Designer</div></div>
+      <div class="team-card"><div class="team-avatar" id="teamAvatar4">🌍</div><div class="team-name">Amara Osei</div><div class="team-role">Head of Operations</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== CONTACT ==================== -->
+<div class="page" id="page-contact">
+  <div class="contact-layout">
+    <div class="contact-left">
+      <div class="section-tag" style="color:rgba(200,144,10,.85);">Get In Touch</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--white);line-height:1.2;margin-top:.5rem;">We'd Love to<br>Hear from You</h1>
+      <p style="color:rgba(255,255,255,.5);font-size:.8rem;line-height:1.8;margin-top:.9rem;">Have a question about our collection, need styling advice, or want to know about an order? We're here to help.</p>
+      <div class="contact-info-items">
+        <div class="contact-info-item"><div class="contact-info-icon">📍</div><div><div class="contact-info-title">Visit Us</div><div class="contact-info-value">Lagos, Nigeria</div></div></div>
+        <div class="contact-info-item"><div class="contact-info-icon">📞</div><div><div class="contact-info-title">Call / WhatsApp</div><div class="contact-info-value" id="contactPhone">+234 xxx xxx xxxx<br>Mon–Sat: 9AM–6PM</div></div></div>
+        <div class="contact-info-item"><div class="contact-info-icon">✉️</div><div><div class="contact-info-title">Email Us</div><div class="contact-info-value" id="contactEmail">hello@smartexquisite.com</div></div></div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="section-tag">Send a Message</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:700;margin-bottom:1.7rem;color:var(--text);">Drop Us a Line</h2>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="John"></div>
+        <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Doe"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="john@example.com"></div>
+      <div class="form-group"><label class="form-label">Subject</label><input type="text" class="form-input" placeholder="How can we help?"></div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" rows="5" placeholder="Tell us more..."></textarea></div>
+      <button class="btn-primary" onclick="submitContact()" style="width:100%;padding:15px;">Send Message</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== BLOG ==================== -->
+<div class="page" id="page-blog">
+  <div class="blog-header-section">
+    <div class="section-tag">Our Journal</div>
+    <h1 class="section-title">Style &amp; Lifestyle<br>Insights</h1>
+  </div>
+  <div class="blog-grid">
+    <div class="blog-card blog-card-featured bi-1" onclick="showToast('Opening article...')"><div class="blog-img"><span class="blog-emoji">🤵</span></div><div class="blog-content"><div class="blog-tag">Style Guide · Featured</div><h2 class="blog-title" style="font-size:1.25rem;">The Art of the Perfect Suit: A Modern Gentleman's Complete Guide</h2><p class="blog-excerpt">Discover everything you need to know about finding, fitting, and styling a suit that makes an unforgettable impression in any room.</p><div class="blog-meta"><span>April 15, 2025</span><span class="blog-dot">◆</span><span>8 min read</span><span class="blog-dot">◆</span><span>Smart Exquisite Team</span></div></div></div>
+    <div class="blog-card bi-2" onclick="showToast('Opening article...')"><div class="blog-img"><span class="blog-emoji">👔</span></div><div class="blog-content"><div class="blog-tag">Trends</div><h2 class="blog-title">Spring 2025: Men's Fashion Trends You Need to Know</h2><p class="blog-excerpt">From relaxed tailoring to bold earth tones, here's what's defining men's style this season.</p><div class="blog-meta"><span>April 8, 2025</span><span class="blog-dot">◆</span><span>5 min read</span></div></div></div>
+    <div class="blog-card bi-3" onclick="showToast('Opening article...')"><div class="blog-img"><span class="blog-emoji">👞</span></div><div class="blog-content"><div class="blog-tag">Accessories</div><h2 class="blog-title">How to Choose the Right Shoes for Every Outfit</h2><p class="blog-excerpt">Your shoes complete the story your outfit tells. Master the art of shoe pairing with our definitive guide.</p><div class="blog-meta"><span>March 30, 2025</span><span class="blog-dot">◆</span><span>6 min read</span></div></div></div>
+    <div class="blog-card bi-4" onclick="showToast('Opening article...')"><div class="blog-img"><span class="blog-emoji">🧥</span></div><div class="blog-content"><div class="blog-tag">Care Guide</div><h2 class="blog-title">The Smart Exquisite Guide to Caring for Premium Fabrics</h2><p class="blog-excerpt">Protect your investment. Learn the proper way to clean, store, and maintain luxury garments so they last a lifetime.</p><div class="blog-meta"><span>March 22, 2025</span><span class="blog-dot">◆</span><span>7 min read</span></div></div></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="toast-icon">✓</span><span class="toast-msg" id="toastMsg">Done!</span></div>
+
+<script>
+// ================================================================
+// ✅ ===== YOUR STORE CONFIG — UPDATE THESE =====
+// ================================================================
+const STORE = {
+  name: 'Smart Exquisite',
+
+  // 🔑 PAYSTACK: Replace with your actual public key from dashboard.paystack.com
+  // Use pk_test_xxx for testing, pk_live_xxx when you go live
+  paystackKey: 'pk_test_YOUR_PAYSTACK_PUBLIC_KEY_HERE',
+
+  currency: 'NGN',           // Do not change
+  currencySymbol: '₦',       // Do not change
+
+  // 📞 Update your contact details here
+  phone: '+234 xxx xxx xxxx',
+  email: 'hello@smartexquisite.com',
+  whatsapp: '234xxxxxxxxxx',  // For WhatsApp links (no + sign)
+
+  // 🚚 Delivery fee in Naira (set to 0 for free)
+  deliveryFee: 2000,
+
+  // 🏷️ Free delivery threshold in Naira
+  freeDeliveryThreshold: 50000,
+};
+
+// ================================================================
+// ✅ ===== YOUR IMAGES CONFIG — ADD YOUR PHOTO PATHS HERE =====
+// ================================================================
+// HOW TO ADD PHOTOS:
+// 1. Create an "images" folder inside your GitHub repo
+// 2. Upload your photos there (e.g. images/suit-01.jpg)
+// 3. Replace the empty strings "" below with your file paths
+// 4. If you leave a path empty "", the emoji placeholder shows instead
+// ================================================================
+const IMAGES = {
+
+  // 🖼️ Hero right panel — best with a tall model/outfit photo (portrait orientation)
+  hero: '',
+  // Example: hero: 'images/hero-model.jpg',
+
+  // 🗂️ Category background photos — landscape/wide photos work best
+  categories: {
+    suits:  '',  // Example: 'images/cat-suits.jpg'
+    casual: '',  // Example: 'images/cat-casual.jpg'
+    formal: '',  // Example: 'images/cat-formal.jpg'
+  },
+
+  // 📦 Product photos — portrait photos (3:4 ratio) work best
+  // Key = product id (matches PRODUCTS array below)
+  products: {
+    1:  '',  // Premium Italian Wool Suit
+    2:  '',  // Oxford Classic Dress Shirt
+    3:  '',  // Slim Fit Chino Trousers
+    4:  '',  // Luxury Cashmere Blazer
+    5:  '',  // Linen Summer Shirt
+    6:  '',  // Royal Cufflinks Set
+    7:  '',  // Tailored Charcoal Trousers
+    8:  '',  // Polo Ralph Collar Tee
+    9:  '',  // Black Tie Evening Suit
+    10: '',  // Classic Leather Belt
+    11: '',  // Formal Necktie Collection
+    12: '',  // Denim Weekend Jacket
+    13: '',  // Navy Slim Fit Suit
+    14: '',  // French Cuff Dress Shirt
+    15: '',  // Merino Wool Cardigan
+    16: '',  // Premium Pocket Square Set
+    17: '',  // Stretch Formal Trousers
+    18: '',  // Bomber Leather Jacket
+    19: '',  // Double-Breasted Suit
+    20: '',  // Slim Tie Bar Set
+    21: '',  // Relaxed Linen Trousers
+    22: '',  // Striped Oxford Shirt
+    23: '',  // Velvet Smoking Jacket
+    24: '',  // Classic Knit Polo
+  },
+
+  // 👤 About section — tall photo of store/brand
+  about: '', // Example: 'images/about-store.jpg'
+
+  // 👥 Team member photos (square or portrait)
+  team: {
+    1: '',  // Team member 1
+    2: '',  // Team member 2
+    3: '',  // Team member 3
+    4: '',  // Team member 4
+  },
+};
+
+// ================================================================
+// ✅ ===== YOUR PRODUCTS — UPDATE NAMES, PRICES & DESCRIPTIONS =====
+// ================================================================
+// Prices are in NAIRA (₦). Update to your actual prices.
+// ================================================================
+const PRODUCTS = [
+  {id:1,  name:"Premium Italian Wool Suit",      category:"Suits",          price:349000, oldPrice:420000, emoji:"🤵", badge:"new",     rating:5, desc:"Crafted from the finest Italian wool — tailored with precision for an impeccable silhouette that commands attention."},
+  {id:2,  name:"Oxford Classic Dress Shirt",     category:"Formal Shirts",  price:45000,  oldPrice:null,   emoji:"👔", badge:null,      rating:5, desc:"A wardrobe essential. Clean lines, premium cotton, perfect for boardrooms and black-tie occasions."},
+  {id:3,  name:"Slim Fit Chino Trousers",        category:"Casual Wear",    price:35000,  oldPrice:42000,  emoji:"👖", badge:"sale",    rating:4, desc:"Modern slim fit in breathable chino fabric. Versatile enough for the office or a weekend outing."},
+  {id:4,  name:"Luxury Cashmere Blazer",         category:"Suits",          price:185000, oldPrice:null,   emoji:"🧥", badge:"new",     rating:5, desc:"Pure cashmere construction with a refined silhouette. The epitome of understated luxury."},
+  {id:5,  name:"Linen Summer Shirt",             category:"Casual Wear",    price:28000,  oldPrice:null,   emoji:"👕", badge:null,      rating:4, desc:"Lightweight linen weave keeps you cool and stylish. Perfect for the Nigerian climate."},
+  {id:6,  name:"Royal Cufflinks Set",            category:"Accessories",    price:18000,  oldPrice:null,   emoji:"💎", badge:null,      rating:5, desc:"Gold-plated cufflinks with intricate detail. The finishing touch every gentleman deserves."},
+  {id:7,  name:"Tailored Charcoal Trousers",     category:"Formal Shirts",  price:42000,  oldPrice:null,   emoji:"🎩", badge:null,      rating:4, desc:"Sharp charcoal trousers with a flat-front cut. Pairs perfectly with blazers and dress shirts."},
+  {id:8,  name:"Polo Collar Tee",                category:"Casual Wear",    price:22000,  oldPrice:28000,  emoji:"👕", badge:"sale",    rating:4, desc:"Premium pique cotton polo with a modern collar. Smart casual perfection."},
+  {id:9,  name:"Black Tie Evening Suit",         category:"Suits",          price:520000, oldPrice:null,   emoji:"🤵", badge:"premium", rating:5, desc:"The ultimate statement suit. Designed for galas, weddings, and any occasion that demands excellence."},
+  {id:10, name:"Classic Leather Belt",           category:"Accessories",    price:22000,  oldPrice:null,   emoji:"🪢", badge:null,      rating:5, desc:"Full-grain leather with a polished buckle. The foundation of every complete look."},
+  {id:11, name:"Formal Necktie Collection",      category:"Accessories",    price:15000,  oldPrice:null,   emoji:"👔", badge:null,      rating:4, desc:"A curated set of silk neckties in classic and contemporary patterns."},
+  {id:12, name:"Denim Weekend Jacket",           category:"Casual Wear",    price:58000,  oldPrice:72000,  emoji:"🧥", badge:"sale",    rating:4, desc:"Premium denim construction with a relaxed fit. Your weekend companion."},
+  {id:13, name:"Navy Slim Fit Suit",             category:"Suits",          price:310000, oldPrice:null,   emoji:"🤵", badge:"new",     rating:5, desc:"Deep navy wool-blend with a modern slim silhouette. A must-have for every serious wardrobe."},
+  {id:14, name:"French Cuff Dress Shirt",        category:"Formal Shirts",  price:52000,  oldPrice:null,   emoji:"👔", badge:null,      rating:4, desc:"Elegantly detailed French cuffs in 100% Egyptian cotton. Paired perfectly with cufflinks."},
+  {id:15, name:"Merino Wool Cardigan",           category:"Casual Wear",    price:48000,  oldPrice:58000,  emoji:"🧶", badge:"sale",    rating:4, desc:"Soft merino wool in a refined slim fit. Elevates your casual wardrobe effortlessly."},
+  {id:16, name:"Premium Pocket Square Set",      category:"Accessories",    price:12000,  oldPrice:null,   emoji:"🎀", badge:null,      rating:5, desc:"Five hand-folded pocket squares in silk and linen blends. The mark of a true gentleman."},
+  {id:17, name:"Stretch Formal Trousers",        category:"Formal Shirts",  price:38000,  oldPrice:null,   emoji:"👖", badge:null,      rating:4, desc:"Four-way stretch fabric for maximum comfort during long days without sacrificing style."},
+  {id:18, name:"Bomber Leather Jacket",          category:"Casual Wear",    price:145000, oldPrice:175000, emoji:"🧥", badge:"sale",    rating:5, desc:"Full-grain leather bomber with a satin lining. Bold, confident, and undeniably luxurious."},
+  {id:19, name:"Double-Breasted Suit",           category:"Suits",          price:380000, oldPrice:null,   emoji:"🤵", badge:"new",     rating:5, desc:"The double-breasted cut reimagined for the modern man. Commanding presence guaranteed."},
+  {id:20, name:"Slim Tie Bar Set",               category:"Accessories",    price:14000,  oldPrice:null,   emoji:"🔗", badge:null,      rating:4, desc:"Stainless steel tie bars with a brushed gold finish. Three widths included."},
+  {id:21, name:"Relaxed Linen Trousers",         category:"Casual Wear",    price:32000,  oldPrice:null,   emoji:"👖", badge:null,      rating:4, desc:"Wide-leg linen in breathable weave. Made for warmth, comfort, and undeniable style."},
+  {id:22, name:"Striped Oxford Shirt",           category:"Formal Shirts",  price:38000,  oldPrice:48000,  emoji:"👔", badge:"sale",    rating:4, desc:"Classic candy stripe in premium Oxford cotton. Works just as well tucked out."},
+  {id:23, name:"Velvet Smoking Jacket",          category:"Suits",          price:480000, oldPrice:null,   emoji:"🧥", badge:"premium", rating:5, desc:"Midnight velvet with satin lapels. For the gentleman who makes an entrance."},
+  {id:24, name:"Classic Knit Polo",              category:"Casual Wear",    price:26000,  oldPrice:null,   emoji:"👕", badge:null,      rating:4, desc:"Fine-knit polo in premium cotton. Dress it up or down — it always delivers."},
+];
+
+// ================================================================
+// STATE & HELPERS
+// ================================================================
+const PER_PAGE = 8;
+let cart = [];
+let currentProduct = null;
+let filteredProducts = [...PRODUCTS];
+let shopPage = 1;
+let couponApplied = false;
+
+function fmt(n){ return STORE.currencySymbol + n.toLocaleString('en-NG'); }
+
+// ================================================================
+// PAGE NAV
+// ================================================================
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  const pg=document.getElementById('page-'+id);
+  if(pg) pg.classList.add('active');
+  const lnk=document.getElementById('nav-'+id);
+  if(lnk) lnk.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='cart') renderCart();
+}
+
+// ================================================================
+// APPLY IMAGES ON LOAD
+// ================================================================
+function applyImages(){
+  // Hero image
+  const heroContainer = document.getElementById('heroImageContainer');
+  if(IMAGES.hero){
+    document.querySelector('.hero-right').style.position = 'relative';
+    const img = document.createElement('img');
+    img.src = IMAGES.hero;
+    img.className = 'hero-model-img';
+    img.alt = 'Smart Exquisite Collection';
+    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:1;';
+    document.querySelector('.hero-right').insertBefore(img, document.querySelector('.hero-right').firstChild);
+    heroContainer.style.zIndex = '3';
+  } else {
+    heroContainer.innerHTML = `
+      <svg width="105" height="116" viewBox="0 0 100 110" fill="none" style="opacity:.5">
+        <defs><linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F0B429"/><stop offset="100%" stop-color="#A07810"/></linearGradient></defs>
+        <polygon points="38,12 45,22 50,10 55,22 62,12 65,28 35,28" fill="url(#hg)"/>
+        <path d="M20,28 L80,28 L80,72 L50,90 L20,72 Z" fill="url(#hg)"/>
+        <rect x="20" y="37" width="60" height="8" fill="#F2EFE8"/>
+        <rect x="20" y="55" width="60" height="8" fill="#F2EFE8"/>
+        <text x="50" y="62" font-family="serif" font-size="28" font-weight="900" fill="#1A1A1A" text-anchor="middle">S</text>
+      </svg>
+      <p style="font-family:'Playfair Display',serif;font-size:.82rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-top:1.1rem;">Premium Collection</p>`;
+  }
+
+  // Category images
+  const cats = {suits:'catBgSuits', casual:'catBgCasual', formal:'catBgFormal'};
+  for(const [key, elId] of Object.entries(cats)){
+    const el = document.getElementById(elId);
+    if(IMAGES.categories[key] && el){
+      el.style.backgroundImage = `url('${IMAGES.categories[key]}')`;
+      el.style.backgroundSize = 'cover';
+      el.style.backgroundPosition = 'center';
+    }
+  }
+
+  // About image
+  if(IMAGES.about){
+    const av = document.getElementById('aboutVisual');
+    const img = document.createElement('img');
+    img.src = IMAGES.about;
+    img.alt = 'Smart Exquisite';
+    av.insertBefore(img, av.firstChild);
+  }
+
+  // Team images
+  for(let i=1;i<=4;i++){
+    if(IMAGES.team[i]){
+      const el = document.getElementById('teamAvatar'+i);
+      if(el){
+        const img = document.createElement('img');
+        img.src = IMAGES.team[i];
+        img.alt = 'Team Member';
+        el.innerHTML = '';
+        el.appendChild(img);
+      }
+    }
+  }
+
+  // Contact details
+  document.getElementById('contactPhone').innerHTML = STORE.phone + '<br>Mon–Sat: 9AM–6PM';
+  document.getElementById('contactEmail').textContent = STORE.email;
+}
+
+// ================================================================
+// PRODUCT CARD HTML — with real photo support + emoji fallback
+// ================================================================
+function createCard(p, fn){
+  let badge = '';
+  if(p.badge==='new') badge=`<div class="product-badge badge-new">New</div>`;
+  else if(p.badge==='sale') badge=`<div class="product-badge badge-sale">Sale</div>`;
+  else if(p.badge==='premium') badge=`<div class="product-badge badge-premium">Premium</div>`;
+  const oldP = p.oldPrice ? `<span class="product-price-old">${fmt(p.oldPrice)}</span>` : '';
+  const stars = [...Array(5)].map((_,i)=>`<span class="star ${i<p.rating?'':'empty'}">★</span>`).join('');
+  const imgSrc = IMAGES.products[p.id];
+  const imgHTML = imgSrc
+    ? `<img src="${imgSrc}" alt="${p.name}" loading="lazy">`
+    : `<div class="product-emoji">${p.emoji}</div>`;
+
+  return `<div class="product-card" onclick="${fn}">
+    <div class="product-img">
+      ${imgHTML}${badge}
+      <div class="product-overlay">
+        <button class="overlay-btn" onclick="event.stopPropagation();addToCart(${p.id})" title="Add to Cart">🛒</button>
+        <button class="overlay-btn" onclick="event.stopPropagation();showProductDetail(${p.id})" title="Quick View">👁</button>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-category">${p.category}</div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-price-row"><div><span class="product-price">${fmt(p.price)}</span>${oldP}</div><div>${stars}</div></div>
+    </div>
+  </div>`;
+}
+
+// ================================================================
+// FEATURED PRODUCTS
+// ================================================================
+function renderFeatured(){
+  document.getElementById('featuredProducts').innerHTML = PRODUCTS.slice(0,4).map(p=>createCard(p,`showProductDetail(${p.id})`)).join('');
+}
+
+// ================================================================
+// SHOP + PAGINATION
+// ================================================================
+function renderShopPage(){
+  const total = filteredProducts.length;
+  const pages = Math.max(1, Math.ceil(total/PER_PAGE));
+  if(shopPage>pages) shopPage = pages;
+  const slice = filteredProducts.slice((shopPage-1)*PER_PAGE, shopPage*PER_PAGE);
+  const grid = document.getElementById('shopProducts');
+  grid.innerHTML = slice.length>0
+    ? slice.map(p=>createCard(p,`showProductDetail(${p.id})`)).join('')
+    : '<div style="grid-column:1/-1;text-align:center;padding:4rem;color:var(--gray);">No products found.</div>';
+  document.getElementById('productCount').textContent = slice.length;
+  document.getElementById('productTotal').textContent = total;
+  const pag = document.getElementById('shopPagination');
+  if(pages<=1){ pag.innerHTML=''; return; }
+  let html = '';
+  for(let i=1;i<=pages;i++) html+=`<button class="page-btn${i===shopPage?' active':''}" onclick="goToPage(${i})">${i}</button>`;
+  pag.innerHTML = html;
+}
+
+function goToPage(n){ shopPage=n; renderShopPage(); window.scrollTo({top:200,behavior:'smooth'}); }
+
+function filterProducts(){
+  const maxP = parseInt(document.getElementById('priceSlider').value);
+  filteredProducts = PRODUCTS.filter(p=>p.price<=maxP);
+  shopPage = 1;
+  renderShopPage();
+}
+
+function applyFilters(){ filterProducts(); showToast('Filters applied!'); }
+
+function updatePrice(v){
+  document.getElementById('priceMax').textContent = '₦' + parseInt(v).toLocaleString('en-NG');
+  filterProducts();
+}
+
+function sortProducts(v){
+  let s = [...filteredProducts];
+  if(v==='price-asc') s.sort((a,b)=>a.price-b.price);
+  else if(v==='price-desc') s.sort((a,b)=>b.price-a.price);
+  else if(v==='newest') s = PRODUCTS.slice().reverse().filter(p=>filteredProducts.find(f=>f.id===p.id));
+  else s = [...filteredProducts];
+  filteredProducts = s;
+  shopPage = 1;
+  renderShopPage();
+}
+
+function setGridCols(n,btn){
+  document.getElementById('shopProducts').style.gridTemplateColumns=`repeat(${n},1fr)`;
+  document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ================================================================
+// PRODUCT DETAIL — with real photo support
+// ================================================================
+function showProductDetail(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  currentProduct = p;
+
+  document.getElementById('pdCat').textContent = p.category;
+  document.getElementById('pdName').textContent = p.name;
+  document.getElementById('pdPrice').textContent = fmt(p.price);
+  document.getElementById('pdDesc').textContent = p.desc || '';
+  document.getElementById('qtyInput').value = 1;
+
+  // Main image
+  const mainImg = document.getElementById('pdMainImg');
+  const imgSrc = IMAGES.products[p.id];
+  if(imgSrc){
+    mainImg.innerHTML = `<img src="${imgSrc}" alt="${p.name}">`;
+  } else {
+    mainImg.textContent = p.emoji;
+  }
+
+  // Thumbnails
+  const thumbEmojis = [p.emoji,'👔','🧥','👞'];
+  document.getElementById('pdThumbs').innerHTML = thumbEmojis.map((em,i)=>{
+    const isActive = i===0 ? 'active' : '';
+    if(imgSrc && i===0){
+      return `<div class="thumb ${isActive}" onclick="selectThumb(this,'${imgSrc}',true)"><img src="${imgSrc}" alt="${p.name}"></div>`;
+    }
+    return `<div class="thumb ${isActive}" onclick="selectThumb(this,'${em}',false)">${em}</div>`;
+  }).join('');
+
+  document.querySelectorAll('.size-btn').forEach((b,i)=>b.classList.toggle('selected',i===2));
+  document.querySelectorAll('.color-swatch').forEach((s,i)=>s.classList.toggle('selected',i===0));
+  showPage('product');
+}
+
+function selectThumb(el, src, isImage){
+  document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  const mainImg = document.getElementById('pdMainImg');
+  if(isImage){
+    mainImg.innerHTML = `<img src="${src}" alt="">`;
+  } else {
+    mainImg.textContent = src;
+  }
+}
+
+function selectSize(btn){ document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); }
+function selectColor(sw){ document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('selected')); sw.classList.add('selected'); }
+function changeQty(d){ const i=document.getElementById('qtyInput'); i.value=Math.max(1,Math.min(10,parseInt(i.value)+d)); }
+function addCurrentToCart(){
+  if(!currentProduct) return;
+  const q = parseInt(document.getElementById('qtyInput').value);
+  for(let i=0;i<q;i++) addToCartInternal(currentProduct.id);
+  updateBadge();
+  showToast(`${currentProduct.name} added to cart! 🛒`);
+}
+
+// ================================================================
+// CART
+// ================================================================
+function addToCart(id){ addToCartInternal(id); updateBadge(); const p=PRODUCTS.find(x=>x.id===id); if(p) showToast(`${p.name} added to cart! 🛒`); }
+function addToCartInternal(id){ const p=PRODUCTS.find(x=>x.id===id); if(!p) return; const e=cart.find(i=>i.id===id); if(e) e.qty+=1; else cart.push({...p,qty:1}); }
+function removeFromCart(id){ cart=cart.filter(i=>i.id!==id); updateBadge(); renderCart(); }
+function updateCartQty(id,d){ const i=cart.find(x=>x.id===id); if(i){ i.qty=Math.max(1,i.qty+d); renderCart(); updateBadge(); } }
+function updateBadge(){ document.getElementById('cartBadge').textContent=cart.reduce((s,i)=>s+i.qty,0); }
+
+function renderCart(){
+  const c = document.getElementById('cartItemsContainer');
+  const l = document.getElementById('cartCountLabel');
+  if(cart.length===0){
+    c.innerHTML=`<div class="empty-cart"><div class="empty-cart-icon">🛒</div><h2>Your Cart is Empty</h2><p>You haven't added anything yet. Explore our collection!</p><button class="btn-primary" onclick="showPage('shop')">Start Shopping</button></div>`;
+    l.textContent='0 items'; updateSummary(0); return;
+  }
+  l.textContent=`${cart.reduce((s,i)=>s+i.qty,0)} item(s)`;
+  c.innerHTML=`<div class="cart-items">${cart.map(item=>{
+    const imgSrc = IMAGES.products[item.id];
+    const imgHTML = imgSrc
+      ? `<img src="${imgSrc}" alt="${item.name}">`
+      : item.emoji;
+    return `<div class="cart-item">
+      <div class="cart-item-img">${imgHTML}</div>
+      <div>
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-meta">${item.category} · Size M</div>
+        <div class="qty-control" style="display:inline-flex;margin-top:.2rem;">
+          <button class="qty-btn" onclick="updateCartQty(${item.id},-1)">−</button>
+          <input type="number" class="qty-input" value="${item.qty}" readonly style="width:44px;">
+          <button class="qty-btn" onclick="updateCartQty(${item.id},1)">+</button>
+        </div>
+      </div>
+      <div class="cart-item-right">
+        <div class="cart-item-price">${fmt(item.price*item.qty)}</div>
+        <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+  updateSummary(cart.reduce((s,i)=>s+i.price*i.qty,0));
+}
+
+function getCartTotals(sub){
+  const discount = couponApplied ? sub * 0.1 : 0;
+  const discounted = sub - discount;
+  const delivery = discounted >= STORE.freeDeliveryThreshold ? 0 : (discounted > 0 ? STORE.deliveryFee : 0);
+  const tax = discounted * 0.075;
+  const total = discounted + delivery + tax;
+  return { sub, discount, discounted, delivery, tax, total };
+}
+
+function updateSummary(sub){
+  const t = getCartTotals(sub);
+  document.getElementById('summarySubtotal').textContent = fmt(t.sub);
+  document.getElementById('summaryShipping').textContent = t.delivery===0 && t.sub>0 ? 'FREE' : fmt(t.delivery);
+  document.getElementById('summaryTax').textContent = fmt(Math.round(t.tax));
+  document.getElementById('summaryTotal').textContent = fmt(Math.round(t.total));
+}
+
+function applyCoupon(){
+  const code = document.getElementById('couponInput').value.trim().toUpperCase();
+  if(code==='SMART10'){ couponApplied=true; renderCart(); showToast('10% discount applied! 🎉'); }
+  else if(!code) showToast('Please enter a coupon code');
+  else showToast('Invalid code. Try SMART10');
+}
+
+// ================================================================
+// CHECKOUT — opens modal with order summary before Paystack
+// ================================================================
+function checkout(){
+  if(cart.length===0){ showToast('Your cart is empty!'); return; }
+
+  const sub = cart.reduce((s,i)=>s+i.price*i.qty, 0);
+  const t = getCartTotals(sub);
+
+  // Build order summary in modal
+  let summaryHTML = `<div class="modal-order-title">Order Summary</div>`;
+  cart.forEach(item=>{
+    summaryHTML += `<div class="modal-order-item"><span>${item.name} ×${item.qty}</span><span>${fmt(item.price*item.qty)}</span></div>`;
+  });
+  if(t.discount>0) summaryHTML += `<div class="modal-order-item" style="color:var(--gold)"><span>Discount (10%)</span><span>−${fmt(Math.round(t.discount))}</span></div>`;
+  summaryHTML += `<div class="modal-order-item"><span>Delivery</span><span>${t.delivery===0?'FREE':fmt(t.delivery)}</span></div>`;
+  summaryHTML += `<div class="modal-order-item"><span>VAT (7.5%)</span><span>${fmt(Math.round(t.tax))}</span></div>`;
+  summaryHTML += `<div class="modal-order-total"><span>Total</span><span>${fmt(Math.round(t.total))}</span></div>`;
+
+  document.getElementById('modalOrderSummary').innerHTML = summaryHTML;
+  document.getElementById('checkoutModal').classList.add('open');
+}
+
+function closeCheckout(){
+  document.getElementById('checkoutModal').classList.remove('open');
+}
+
+// ================================================================
+// PAYSTACK PAYMENT
+// ================================================================
+function payWithPaystack(){
+  const name  = document.getElementById('checkoutName').value.trim();
+  const email = document.getElementById('checkoutEmail').value.trim();
+  const phone = document.getElementById('checkoutPhone').value.trim();
+
+  if(!name){ showToast('Please enter your full name'); return; }
+  if(!email || !email.includes('@')){ showToast('Please enter a valid email address'); return; }
+  if(!phone){ showToast('Please enter your phone number'); return; }
+
+  if(STORE.paystackKey === 'pk_test_YOUR_PAYSTACK_PUBLIC_KEY_HERE'){
+    showToast('⚠️ Add your Paystack key in STORE config to enable payments');
+    return;
+  }
+
+  const sub   = cart.reduce((s,i)=>s+i.price*i.qty, 0);
+  const t     = getCartTotals(sub);
+  const total = Math.round(t.total);
+
+  const handler = PaystackPop.setup({
+    key:      STORE.paystackKey,
+    email:    email,
+    amount:   total * 100,         // Paystack expects kobo (NGN × 100)
+    currency: STORE.currency,
+    ref:      'SE-' + Date.now() + '-' + Math.floor(Math.random()*9999),
+    metadata: {
+      custom_fields: [
+        { display_name: 'Customer Name',  variable_name: 'customer_name',  value: name  },
+        { display_name: 'Phone Number',   variable_name: 'phone',          value: phone },
+        { display_name: 'Order Items',    variable_name: 'items',          value: cart.map(i=>`${i.name} ×${i.qty}`).join(', ') },
+      ]
+    },
+    callback: function(response){
+      // ✅ PAYMENT SUCCESSFUL
+      closeCheckout();
+      cart = [];
+      couponApplied = false;
+      updateBadge();
+      renderCart();
+      showToast('🎉 Payment successful! Order confirmed. Check your email.');
+      // Optional: redirect to a thank-you page
+      // window.location.href = 'thank-you.html';
+    },
+    onClose: function(){
+      showToast('Payment window closed.');
+    }
+  });
+
+  handler.openIframe();
+}
+
+// ================================================================
+// SEARCH
+// ================================================================
+function toggleSearch(){ const o=document.getElementById('searchOverlay'); const isOpen=o.classList.toggle('open'); if(isOpen) setTimeout(()=>document.getElementById('searchInput').focus(),100); }
+function closeSearchOverlay(e){ if(e.target===document.getElementById('searchOverlay')) toggleSearch(); }
+function doSearch(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  document.getElementById('searchInput').value = '';
+  toggleSearch();
+  if(!q){ showToast('Please enter a search term'); return; }
+  const res = PRODUCTS.filter(p=>p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q));
+  filteredProducts = res.length>0 ? res : [...PRODUCTS];
+  shopPage = 1;
+  renderShopPage();
+  showPage('shop');
+  showToast(res.length>0 ? `Found ${res.length} result(s) for "${q}"` : 'No exact matches — showing all products');
+}
+function searchFor(t){ document.getElementById('searchInput').value=t; doSearch(); }
+
+// ================================================================
+// MOBILE MENU
+// ================================================================
+function openMobileMenu(){ document.getElementById('mobileMenu').classList.add('open'); document.getElementById('mobileOverlay').classList.add('open'); }
+function closeMobileMenu(){ document.getElementById('mobileMenu').classList.remove('open'); document.getElementById('mobileOverlay').classList.remove('open'); }
+
+// ================================================================
+// FORMS
+// ================================================================
+function submitContact(){ showToast("Message sent! We'll respond within 24hrs ✉️"); }
+function subscribeNewsletter(){
+  const e = document.getElementById('newsletterEmail').value.trim();
+  if(!e||!e.includes('@')){ showToast('Please enter a valid email address'); return; }
+  showToast('Welcome to the Smart Exquisite circle! 🎉');
+  document.getElementById('newsletterEmail').value = '';
+}
+
+// ================================================================
+// TOAST
+// ================================================================
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3500);
+}
+
+// ================================================================
+// SCROLL NAV
+// ================================================================
+window.addEventListener('scroll',()=>{ document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>50); });
+
+// Close checkout modal on overlay click
+document.getElementById('checkoutModal').addEventListener('click', function(e){ if(e.target===this) closeCheckout(); });
+
+// ================================================================
+// INIT
+// ================================================================
+applyImages();
+renderFeatured();
+filteredProducts = [...PRODUCTS];
+renderShopPage();
+</script>
+
+</body>
+</html>
