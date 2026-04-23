@@ -183,8 +183,8 @@
   .category-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:2px; height:470px; }
   .category-card { position:relative; overflow:hidden; cursor:pointer; }
   .cat-suit .cat-bg { background:linear-gradient(160deg,#2a1a0a,#1a1005); }
-  .cat-casual .cat-bg { background:linear-gradient(160deg,#0d1a0d,#152515); }
-  .cat-formal .cat-bg { background:linear-gradient(160deg,#0d0d1a,#10101f); }
+  .cat-isiagu .cat-bg { background:linear-gradient(160deg,#0d1a0d,#152515); }
+  .cat-agbada .cat-bg { background:linear-gradient(160deg,#0d0d1a,#10101f); }
   .cat-overlay { position:absolute; inset:0; background:rgba(212,160,23,.07); }
   .cat-info { position:absolute; bottom:0; left:0; right:0; padding:1.6rem; background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 100%); z-index:2; }
   .cat-tag { font-size:.51rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:.35rem; }
@@ -594,7 +594,7 @@
 <div class="page active" id="page-home">
   <section class="hero">
     <div class="hero-left">
-      <div class="hero-tag">New Collection 2025</div>
+      <div class="hero-tag">New Collection 2026</div>
       <h1 class="hero-title">Dress Like<br><span class="gold">Royalty.</span><br>Live with Style.</h1>
       <p class="hero-subtitle">Smart Exquisite redefines men's fashion — where timeless elegance meets modern refinement. Every piece is crafted for the man who demands excellence.</p>
       <div class="hero-buttons">
@@ -648,19 +648,19 @@
         <div class="cat-bg" id="catBgSuits"></div>
         <div class="cat-overlay"></div>
         <div class="cat-icon">🤵</div>
-        <div class="cat-info"><div class="cat-tag">Premium Collection</div><div class="cat-title">Luxury Suits</div><div class="cat-count">48 Products</div></div>
+        <div class="cat-info"><div class="cat-tag">Premium Collection</div><div class="cat-title">Luxury Suits</div><div class="cat-count">15 Products</div></div>
       </div>
       <div class="category-card cat-casual" onclick="showPage('shop')">
-        <div class="cat-bg" id="catBgCasual"></div>
+        <div class="cat-bg" id="catBgIsiagu"></div>
         <div class="cat-overlay"></div>
         <div class="cat-icon">👕</div>
-        <div class="cat-info"><div class="cat-tag">Everyday Style</div><div class="cat-title">Casual Wear</div><div class="cat-count">120 Products</div></div>
+        <div class="cat-info"><div class="cat-tag">Everyday Style</div><div class="cat-title">Luxury Isiagu</div><div class="cat-count">8 Products</div></div>
       </div>
       <div class="category-card cat-formal" onclick="showPage('shop')">
-        <div class="cat-bg" id="catBgFormal"></div>
+        <div class="cat-bg" id="catBgAgbada"></div>
         <div class="cat-overlay"></div>
         <div class="cat-icon">👔</div>
-        <div class="cat-info"><div class="cat-tag">Office Ready</div><div class="cat-title">Formal Wear</div><div class="cat-count">76 Products</div></div>
+        <div class="cat-info"><div class="cat-tag">Office Ready</div><div class="cat-title">Premium Agbada</div><div class="cat-count">5 Products</div></div>
       </div>
     </div>
   </section>
@@ -1010,16 +1010,16 @@ const IMAGES = {
   categories: {
     suits:  'https://i.ibb.co/R44f4gJC/Whats-App-Image-2026-04-23-at-02-12-58-1.jpg',  // Example: 'images/cat-suits.jpg'
     casual: 'https://i.ibb.co/Fdm91pP/Whats-App-Image-2026-04-23-at-02-12-58.jpg',  // Example: 'images/cat-casual.jpg'
-    formal: 'https://i.ibb.co/Pz9bBt9q/Whats-App-Image-2026-04-23-at-00-06-41.jpg',  // Example: 'images/cat-formal.jpg'
+    agbada: 'https://i.ibb.co/Pz9bBt9q/Whats-App-Image-2026-04-23-at-00-06-41.jpg',  // Example: 'images/cat-formal.jpg'
   },
 
   // 📦 Product photos — portrait photos (3:4 ratio) work best
   // Key = product id (matches PRODUCTS array below)
   products: {
     1:  'https://i.ibb.co/R44f4gJC/Whats-App-Image-2026-04-23-at-02-12-58-1.jpg',  // Premium Italian Wool Suit
-    2:  '',  // Oxford Classic Dress Shirt
-    3:  '',  // Slim Fit Chino Trousers
-    4:  '',  // Luxury Cashmere Blazer
+    2:  'https://i.ibb.co/C3PNGMbY/Whats-App-Image-2026-04-23-at-02-12-58-2.jpg',  // Luxurious Agbada
+    3:  'https://i.ibb.co/6R9d9P4r/Whats-App-Image-2026-04-23-at-02-12-59.jpg',  // The Smart Odogwu
+    4:  'https://i.ibb.co/1tdnCyR9/Whats-App-Image-2026-04-23-at-02-12-59-1.jpg',  // Luxury Cashmere Blazer
     5:  '',  // Linen Summer Shirt
     6:  '',  // Royal Cufflinks Set
     7:  '',  // Tailored Charcoal Trousers
